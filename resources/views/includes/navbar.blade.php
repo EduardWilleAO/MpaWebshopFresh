@@ -1,5 +1,3 @@
-@section('navbar')
-
 <ul>
     <li><a href="{{ url('/') }}">Homepage</a></li>
     <li class="has-dropdown"><a href="{{ url('categories') }}">Categories</a>
