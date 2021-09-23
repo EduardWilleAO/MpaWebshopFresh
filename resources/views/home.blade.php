@@ -2,7 +2,9 @@
 @include('includes.navbar') 
 
 <div>
-    Hello World
+@foreach ($category as $index)    
+    <p>{{ $index->category }}</p>
+@endforeach
 </div>
 
 @include('includes.footer')
