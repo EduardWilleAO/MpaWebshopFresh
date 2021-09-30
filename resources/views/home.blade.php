@@ -1,10 +1,9 @@
 @include('includes.header')
 @include('includes.navbar') 
 
-<div>
-    @foreach ($allCategories as $index)    
-        <p>{{ $index->category }}</p>
-    @endforeach
-</div>
+@foreach ($allProducts as $index)    
+    <p>{{ $index->product_name }}</p>
+    <p>{{ $index->price }}</p>
+@endforeach
 
 @include('includes.footer')
