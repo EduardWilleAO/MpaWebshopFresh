@@ -1,9 +1,6 @@
 @include('includes.header')
 @include('includes.navbar') 
 
-@foreach ($allProducts as $index)    
-    <p>{{ $index->product_name }}</p>
-    <p>{{ $index->price }}</p>
-@endforeach
+<h1>Welcome!</h1>
 
 @include('includes.footer')
