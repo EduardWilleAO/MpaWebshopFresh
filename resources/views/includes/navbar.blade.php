@@ -1,4 +1,4 @@
-<ul>
+<!--<ul>
     <li><a href="{{ url('/') }}">Homepage</a></li>
     <li class="has-dropdown"><a href="{{ url('categories') }}">Categories</a>
         <ul id="dropdown-container">
@@ -10,4 +10,17 @@
         </ul>
     </li>
     <li><a href="{{ url('cart') }}">Cart</a></li>
-</ul>
+</ul>-->
+
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url('/') }}">Homepage</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ url('/products') }}">Products</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
