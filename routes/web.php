@@ -15,7 +15,8 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products', [ProductController::class, 'returnAll']);
+Route::get('/products/{id}', [ProductController::class, 'index']);
+Route::get('/cart', [CartController::class, 'index']);
 
-Route::get('/', function () { return view('home'); });
+Route::get('/', [CategoryController::class, 'index']);

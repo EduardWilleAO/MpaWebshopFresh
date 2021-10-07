@@ -7,7 +7,13 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index(){
+    public function index($id){
+        $allProducts = Product::all()->where('category_id', $id);
+
+        return view('products', compact('allProducts'));
+    }
+
+    public function returnAll(){
         $allProducts = Product::all();
 
         return view('products', compact('allProducts'));
