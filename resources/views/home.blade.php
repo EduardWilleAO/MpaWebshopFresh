@@ -2,7 +2,7 @@
 @include('includes.navbar') 
 
 <div class='container text-center'>
-    <h1 class='display-3'>Homepage!</h1>
+    <h1 class='display-3' style='color: white; text-shadow: 0px 0px 3px black;'>Homepage!</h1>
 </div>
 
 @if(isset($allCategories))
