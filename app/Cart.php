@@ -18,4 +18,13 @@ class Cart
             $this->products = NULL;
         }
     }
+
+    public function getProducts($request){
+        return $this->products;
+    }
+
+    public function addToCart($request, $name){
+        //when item is added in cart, check if exists, if true, add count instead of adding to array (make products in the array objects)
+        $request->session()->push('products', $name);
+    }
 }
