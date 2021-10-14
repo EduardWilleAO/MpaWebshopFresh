@@ -7,7 +7,7 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index($id){
+    public function returnSpecific($id){
         $allProducts = Product::all()->where('category_id', $id);
 
         return view('products', compact('allProducts'));
@@ -17,5 +17,14 @@ class ProductController extends Controller
         $allProducts = Product::all();
 
         return view('products', compact('allProducts'));
+    }
+
+    public function getForCart(Request $request, $id){
+        $specificProduct = Product::all()->where('id', $id);
+
+        app('App\Http\Controllers\CartController')->addToCart($request, $specificProduct);
+        
+        //return redirect('cart')->with('specificProduct');
+        return back();
     }
 }

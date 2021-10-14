@@ -13,7 +13,7 @@
         <h2>{{ $category->category }}</h2>
     </div>
     <div class="card-body">
-        <a href="{{ url('/products', $category->id) }}" class="btn btn-lg btn-primary">Go to category</a>
+        <a href="{{ url('/product', $category->id) }}" class="btn btn-lg btn-primary">Go to category</a>
     </div>
     </div>
 </div>

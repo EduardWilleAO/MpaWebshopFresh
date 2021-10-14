@@ -27,4 +27,8 @@ class Cart
         //when item is added in cart, check if exists, if true, add count instead of adding to array (make products in the array objects)
         $request->session()->push('products', $name);
     }
+
+    public function clearCart($request){
+        $request->session()->flush();
+    }
 }
