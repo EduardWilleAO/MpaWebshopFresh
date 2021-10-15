@@ -6,7 +6,9 @@
 @foreach ($products as $product)
     <div class="card m-2">
         <div class="card-body">
-            {{ $product }}
+            {{ $product->name }}
+            {{ $product->price }}
+            {{ $product->amount }}
         </div>
     </div>
 @endforeach

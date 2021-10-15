@@ -36,7 +36,7 @@ class CartController extends Controller
         $cart = new Cart($request);
 
         foreach($product as $index){
-            $cart->addToCart($request, $index->product_name);
+            $cart->addToCart($request, $index->product_name, $index->price);
         }
         /*foreach($product as $index){
             echo $index->product_name;

@@ -4,6 +4,7 @@ namespace App;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\arrObj;
 
 class Cart
 {
@@ -23,9 +24,26 @@ class Cart
         return $this->products;
     }
 
-    public function addToCart($request, $name){
-        //when item is added in cart, check if exists, if true, add count instead of adding to array (make products in the array objects)
-        $request->session()->push('products', $name);
+    public function addToCart($request, $name, $price){
+        $obj = $request->session()->get('products'); // get all products
+
+        if($obj != null) { // if obj is empty, then just add item
+            $find = array_search($name, array_column($obj, 'name'));
+
+            if($find !== false){
+                $obj[$find]->amount = $obj[$find]->amount + 1;
+            } else {
+                $amount = 1;
+                
+                $arr = new arrObj($name, $price, $amount);
+                $request->session()->push('products', $arr);
+            }
+        } else {
+            $amount = 1;
+            
+            $arr = new arrObj($name, $price, $amount);
+            $request->session()->push('products', $arr);
+        }
     }
 
     public function clearCart($request){
