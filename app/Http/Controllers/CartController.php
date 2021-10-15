@@ -10,6 +10,7 @@ class CartController extends Controller
     public function index(Request $request){
         $cart = new Cart($request);
         $products = $cart->getProducts($request);
+        $totalPrice = $cart->getTotalPrice($request);
 
         /*$this->addToCart($request, 'Product 1');
         $this->addToCart($request, 'Product 2');
@@ -29,7 +30,7 @@ class CartController extends Controller
 
         //$cart->clearCart($request);
 
-        return view('cart', compact('products'));
+        return view('cart', compact('products', 'totalPrice'));
     }
 
     public function addToCart(Request $request, $product){

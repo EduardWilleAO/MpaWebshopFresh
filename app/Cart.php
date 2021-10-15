@@ -24,6 +24,21 @@ class Cart
         return $this->products;
     }
 
+    public function getTotalPrice($request){
+        $obj = $request->session()->get('products');
+        $prevPrice;
+
+        foreach($obj as $index){
+            $currPrice = $index->price;
+            $totalPrice = $currPrice * $index->amount;
+
+            if(isset($prevPrice)) $prevPrice = $prevPrice + $totalPrice;
+            else $prevPrice = $totalPrice;
+        }
+
+        return $prevPrice;
+    }
+
     public function addToCart($request, $name, $price){
         $obj = $request->session()->get('products'); // get all products
 
