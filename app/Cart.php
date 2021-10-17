@@ -28,12 +28,16 @@ class Cart
         $obj = $request->session()->get('products');
         $prevPrice;
 
-        foreach($obj as $index){
-            $currPrice = $index->price;
-            $totalPrice = $currPrice * $index->amount;
+        if($obj){
+            foreach($obj as $index){
+                $currPrice = $index->price;
+                $totalPrice = $currPrice * $index->amount;
 
-            if(isset($prevPrice)) $prevPrice = $prevPrice + $totalPrice;
-            else $prevPrice = $totalPrice;
+                if(isset($prevPrice)) $prevPrice = $prevPrice + $totalPrice;
+                else $prevPrice = $totalPrice;
+            }
+        } else {
+            $prevPrice = 0;
         }
 
         return $prevPrice;
