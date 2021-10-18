@@ -6,13 +6,12 @@
 @foreach ($products as $product)
     <div class="card m-2">
         <div class="card-body">
-            <div>
+            <div style="width: 50%; float: left;">
                 <h3><b>Product:</b> {{ $product->name }}</h3>
                 <h5><b>Price:</b> €{{ $product->price }}</h5>
-            </div>
-            <div>
                 <h5><b>Amount:</b> {{ $product->amount }}</h5>
             </div>
+            <img  style="max-height: 10rem; float: right;" src="{{ $product->img_url }}" onerror="this.onerror=null; this.src='https://picsum.photos/1920/1080'" alt="">
         </div>
     </div>
 @endforeach

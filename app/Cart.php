@@ -43,7 +43,7 @@ class Cart
         return $prevPrice;
     }
 
-    public function addToCart($request, $name, $price, $userAmount){
+    public function addToCart($request, $name, $img_url, $price, $userAmount){
         $obj = $request->session()->get('products'); // get all products
 
         if($obj != null) {
@@ -54,13 +54,13 @@ class Cart
             } else {
                 $amount = $userAmount;
                 
-                $arr = new arrObj($name, $price, $amount);
+                $arr = new arrObj($name, $img_url, $price, $amount);
                 $request->session()->push('products', $arr);
             }
         } else {
             $amount = $userAmount;
             
-            $arr = new arrObj($name, $price, $amount);
+            $arr = new arrObj($name, $img_url, $price, $amount);
             $request->session()->push('products', $arr);
         }
     }
