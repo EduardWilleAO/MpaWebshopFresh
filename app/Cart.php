@@ -40,6 +40,8 @@ class Cart
             $prevPrice = 0;
         }
 
+        $prevPrice = number_format($prevPrice, 2);
+
         return $prevPrice;
     }
 

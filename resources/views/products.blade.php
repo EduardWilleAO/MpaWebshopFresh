@@ -2,6 +2,16 @@
 @include('includes.navbar') 
 
 <div class="container"> 
+  @if(isset($category)) 
+    <div class='container text-center'>
+      <h1 class='display-3' style='text-transform: capitalize; color: white; text-shadow: 0px 0px 3px black;'>{{ $category }}</h1>
+    </div>
+  @else
+    <div class='container text-center'>
+      <h1 class='display-3' style='color: white; text-shadow: 0px 0px 3px black;'>All products</h1>
+    </div>
+  @endif
+
   @if (isset($allProducts))
   @foreach ($allProducts as $index)
   <div class="card text-center mt-3" style="width: 18rem; float: left; margin-left: 1rem;">

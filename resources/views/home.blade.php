@@ -10,10 +10,10 @@
 <div class="container mt-5 text-center">
     <div class="card mt-3" style="width: 18rem; float: left; margin-left: 1rem;">
     <div class="card-header">
-        <h2>{{ $category->category }}</h2>
+        <h2 style="text-transform: capitalize;">{{ $category->category }}</h2>
     </div>
     <div class="card-body">
-        <a href="{{ url('/product', $category->id) }}" class="btn btn-lg btn-primary">Go to category</a>
+        <a href="{{ url('/category', $category->id) }}" class="btn btn-lg btn-primary">Go to category</a>
     </div>
     </div>
 </div>

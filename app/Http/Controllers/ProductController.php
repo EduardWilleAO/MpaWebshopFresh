@@ -10,7 +10,7 @@ class ProductController extends Controller
     public function returnSpecific($id){
         $allProducts = Product::all()->where('category_id', $id);
 
-        return view('products', compact('allProducts'));
+        return $allProducts;
     }
 
     public function returnAll(){

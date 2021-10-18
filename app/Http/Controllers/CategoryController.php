@@ -12,4 +12,13 @@ class CategoryController extends Controller
 
         return view('home', compact('allCategories'));
     }
+
+    public function getCategory($id){
+        $category = Category::all()->where('id', $id);
+        $allProducts = app('App\Http\Controllers\ProductController')->returnSpecific($id);
+
+        foreach($category as $index) $category = $index->category;
+
+        return view('products', compact('category', 'allProducts'));
+    }
 }
