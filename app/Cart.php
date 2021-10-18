@@ -67,6 +67,27 @@ class Cart
         }
     }
 
+    public function updateAmount($request, $name, $amount){
+        $obj = $request->session()->get('products');
+
+        foreach($obj as $index){
+            if($index->name == $name){
+                $index->amount = $amount;
+            }
+        }
+    }
+
+    public function delete($request, $name){    
+        $obj =  $request->session()->get('products');   
+        
+        foreach($obj as $index=>$key){
+            if($key->name == $name){
+                unset($obj[$index]);
+                $request->session()->put('products', $obj);
+            }
+        }
+    }
+
     public function clearCart($request){
         $request->session()->flush();
     }

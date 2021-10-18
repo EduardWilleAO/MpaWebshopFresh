@@ -20,5 +20,6 @@ Route::get('/products', [ProductController::class, 'returnAll']);
 Route::get('/category/{id}', [CategoryController::class, 'getCategory']);
 Route::get('/cart', [CartController::class, 'index']);
 Route::post('/addToCart', [ProductController::class, 'getForCart']);
+Route::post('/updateAmount', [CartController::class, 'updateAmount']);
 
 Route::get('/', [CategoryController::class, 'index']);

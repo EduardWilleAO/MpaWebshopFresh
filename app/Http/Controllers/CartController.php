@@ -27,4 +27,18 @@ class CartController extends Controller
             echo $index->product_name;
         }*/
     }
+
+    public function updateAmount(Request $request){
+        $name = $_POST['name'];
+        $amount = $_POST['amount'];
+
+        $cart = new Cart($request);
+        if($amount === "0"){
+            $cart->delete($request, $name);
+        } else {
+            $cart->updateAmount($request, $name, $amount);
+        }
+        
+        return back();
+    }
 }
