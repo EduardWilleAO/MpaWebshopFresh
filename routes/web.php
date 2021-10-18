@@ -19,6 +19,6 @@ use App\Http\Controllers\CartController;
 Route::get('/products', [ProductController::class, 'returnAll']);
 Route::get('/product/{id}', [ProductController::class, 'returnSpecific']);
 Route::get('/cart', [CartController::class, 'index']);
-Route::get('/addToCart/{id}', [ProductController::class, 'getForCart']);
+Route::post('/addToCart', [ProductController::class, 'getForCart']);
 
 Route::get('/', [CategoryController::class, 'index']);

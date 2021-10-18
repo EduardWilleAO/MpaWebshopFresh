@@ -33,11 +33,11 @@ class CartController extends Controller
         return view('cart', compact('products', 'totalPrice'));
     }
 
-    public function addToCart(Request $request, $product){
+    public function addToCart(Request $request, $product, $userAmount){
         $cart = new Cart($request);
 
         foreach($product as $index){
-            $cart->addToCart($request, $index->product_name, $index->price);
+            $cart->addToCart($request, $index->product_name, $index->price, $userAmount);
         }
         /*foreach($product as $index){
             echo $index->product_name;

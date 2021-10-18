@@ -8,12 +8,17 @@
     <h4 class="card-header">{{ $index->product_name }}</h4>
     <div class="card-body">
       <img src="https://picsum.photos/500" class="card-img-top" alt="">
-      <p class="card-text mt-3">{{ $index->price }}</p>
-      <a href="{{ url('/addToCart', $index->id) }}" class="btn btn-success">Add to cart</a>
+      <p class="card-text mt-3">{{ $index->price }}</p>      
+      <form method="post" action="/addToCart">
+        @csrf <!-- This validates the form, required for post method -->
+        <input name="id" type="hidden" value="{{ $index->id }}">
+        <input name="amount" class="text-center" type="number" value="1" min="1">  
+        <input class="btn btn-success mt-2" type="submit" value="Add to cart!">
+      </form>
     </div>
   </div>
   @endforeach
-  @endif
+  @endif  
 </div>
 
 @include('includes.footer')

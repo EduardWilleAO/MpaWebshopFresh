@@ -19,10 +19,13 @@ class ProductController extends Controller
         return view('products', compact('allProducts'));
     }
 
-    public function getForCart(Request $request, $id){
+    public function getForCart(Request $request){
+        $id = $_POST['id'];
+        $userAmount = $_POST['amount'];
+
         $specificProduct = Product::all()->where('id', $id);
 
-        app('App\Http\Controllers\CartController')->addToCart($request, $specificProduct);
+        app('App\Http\Controllers\CartController')->addToCart($request, $specificProduct, $userAmount);
         
         //return redirect('cart')->with('specificProduct');
         return back();
