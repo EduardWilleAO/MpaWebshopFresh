@@ -15,17 +15,11 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            [
-                'category' => 'games'
-            ], [
-                'category' => 'chairs'
-            ], [
-                'category' => 'desks'
-            ], [
-                'category' => 'microphones'
-            ], [
-                'category' => 'peripherals'
-            ]
+            ['category' => 'games'], 
+            ['category' => 'hardware'], 
+            ['category' => 'accessories'], 
+            ['category' => 'simulation gear'], 
+            ['category' => 'camping gear']
         ]);
     }
 }

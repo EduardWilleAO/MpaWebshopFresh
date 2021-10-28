@@ -12,6 +12,7 @@
     </div>
   @endif
 
+  <div style="display: flex; flex-wrap: wrap;">
   @if (isset($allProducts))
   @foreach ($allProducts as $index)
   <div class="card text-center mt-3" style="width: 18rem; float: left; margin-left: 1rem;">
@@ -29,6 +30,7 @@
   </div>
   @endforeach
   @endif  
+  </div>
 </div>
 
 @include('includes.footer')
