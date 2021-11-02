@@ -23,6 +23,42 @@
         <li class="nav-item">
           <a class="nav-link active" href="{{ url('/cart') }}">Cart</a>
         </li>
+        <!--<li class="nav-item">
+          <a class="nav-link active" href="{{ route('login') }}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ route('register') }}">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ route('logout') }}">Logout</a>
+        </li>-->
+
+        <ul class="navbar-nav" style="position: absolute; right: 5rem;">
+          @guest <!-- if not logged in -->
+              @if (Route::has('login'))
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                  </li>
+              @endif
+
+              @if (Route::has('register'))
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                  </li>
+              @endif
+          @else <!-- if logged in -->
+              <li class="nav-item">
+                  <a class="nav-link" style="color: white;">Welcome {{ Auth::user()->name }}!</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                      {{ __('Logout') }}
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+              </li>
+          @endguest
+      </ul>
+
       </ul>
     </div>
   </div>
