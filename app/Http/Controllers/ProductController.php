@@ -7,8 +7,14 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function returnSpecific($id){
-        $allProducts = Product::all()->where('category_id', $id);
+    public function returnSingle($id){
+        $product = Product::where('id', $id)->get();
+
+        return view('product',compact('product'));
+    }
+
+    public function returnWCategory($id){
+        $allProducts = Product::where('category_id', $id)->get();
 
         return $allProducts;
     }
@@ -23,7 +29,7 @@ class ProductController extends Controller
         $id = $_POST['id'];
         $userAmount = $_POST['amount'];
 
-        $specificProduct = Product::all()->where('id', $id);
+        $specificProduct = Product::where('id', $id)->get();
 
         app('App\Http\Controllers\CartController')->addToCart($request, $specificProduct, $userAmount);
         

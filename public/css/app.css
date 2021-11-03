@@ -17,3 +17,8 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+h4 > a {
+    text-decoration: none!important;
+    color: black!important;
+}
