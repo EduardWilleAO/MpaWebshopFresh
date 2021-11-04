@@ -41,4 +41,11 @@ class CartController extends Controller
         
         return back();
     }
+
+    public function confirmOrder(Request $request){
+        $cart = new Cart($request);
+        $cart->confirmCart($request);
+
+        return back();
+    }
 }

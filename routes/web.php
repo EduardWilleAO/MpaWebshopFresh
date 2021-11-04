@@ -21,6 +21,7 @@ Route::get('/category/{id}', [CategoryController::class, 'getCategory']);
 Route::get('/cart', [CartController::class, 'index']);
 Route::post('/addToCart', [ProductController::class, 'getForCart']);
 Route::post('/updateAmount', [CartController::class, 'updateAmount']);
+Route::get('/confirmOrder', [CartController::class, 'confirmOrder']);
 
 Route::get('/', [CategoryController::class, 'index']);
 Route::get('/home', [CategoryController::class, 'index']);

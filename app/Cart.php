@@ -91,4 +91,8 @@ class Cart
     public function clearCart($request){
         $request->session()->flush();
     }
+
+    public function confirmCart($request){
+    
+    }
 }

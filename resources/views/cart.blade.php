@@ -27,8 +27,14 @@
 </div>
 @if(isset($totalPrice))
 <div class="container bg-light rounded-bottom p-1">
-    <div class="container-fluid d-flex justify-content-end">
-        <h3 class="p-2"><b>Total price:</b> €{{ $totalPrice }}</h3>
+    <div class="container-fluid">
+        <div class="p-2 d-inline-block" style="width: 49%;">
+            <a href="{{ url('confirmOrder') }}" class="btn btn-success p-2">Order Products</a>
+        </div>
+        
+        <div class="p-2 d-inline-block" style="width: 49%;">
+            <h3 class="text-end p-2"><b>Total price:</b> €{{ $totalPrice }}</h3>
+        </div>
     </div>
 </div>
 @endif
