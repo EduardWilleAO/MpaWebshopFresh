@@ -23,6 +23,11 @@
         <li class="nav-item">
           <a class="nav-link active" href="{{ url('/cart') }}">Cart</a>
         </li>
+        @if(Auth::check())
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ url('/orderHistory') }}">Orders</a>
+        </li>
+        @endif
         <!--<li class="nav-item">
           <a class="nav-link active" href="{{ route('login') }}">Login</a>
         </li>

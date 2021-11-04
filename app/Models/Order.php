@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $table = 'orders';
-
     protected $fillable = ['order_id', 'user', 'product', 'product_amount'];
 
     public function addProduct($currentUser, $obj){
@@ -32,6 +30,6 @@ class Order extends Model
     }
 
     public function getOrders(){
-        
+        return Order::all();
     }
 }

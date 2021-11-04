@@ -99,10 +99,6 @@ class Cart
 
         $order->addProduct($user, $obj);
 
-        /*foreach($obj as $index){
-            $currProduct = $order->addProduct($index, $user);
-        }*/
-
         return back();
     }
 }
