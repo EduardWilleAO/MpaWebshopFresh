@@ -14,7 +14,9 @@ class CategoryController extends Controller
     }
 
     public function getCategory($id){
-        $category = Category::all()->where('id', $id);
+        $categories = new Category();
+        $category = $categories->getCategories('id', $id);
+        
         $allProducts = app('App\Http\Controllers\ProductController')->returnWCategory($id);
 
         foreach($category as $index) $category = $index->category;
