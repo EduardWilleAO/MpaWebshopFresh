@@ -10,7 +10,7 @@ class OrderController extends Controller
     public function index(){
         $order = new Order();
         $orders = $order->getOrders();
-
+        
         return view('orders', ['orders' => $orders]);
     }
 }
