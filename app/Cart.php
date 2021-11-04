@@ -4,6 +4,7 @@ namespace App;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Order;
 use App\arrObj;
 
 class Cart
@@ -92,7 +93,16 @@ class Cart
         $request->session()->flush();
     }
 
-    public function confirmCart($request){
-    
+    public function confirmCart($request, $user){
+        $obj = $request->session()->get('products');
+        $order = new Order();
+
+        $order->addProduct($user, $obj);
+
+        /*foreach($obj as $index){
+            $currProduct = $order->addProduct($index, $user);
+        }*/
+
+        return back();
     }
 }

@@ -44,7 +44,7 @@ class CartController extends Controller
 
     public function confirmOrder(Request $request){
         $cart = new Cart($request);
-        $cart->confirmCart($request);
+        $cart->confirmCart($request, $_POST['user']);
 
         return back();
     }
