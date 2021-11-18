@@ -20,7 +20,7 @@ Route::get('/products', [ProductController::class, 'returnAll']);
 Route::get('/product/{id}', [ProductController::class, 'returnSingle']);
 Route::get('/category/{id}', [CategoryController::class, 'getCategory']);
 Route::get('/cart', [CartController::class, 'index']);
-Route::get('/orderHistory', [OrderController::class, 'index']);
+Route::get('/orderHistory/{id}', [OrderController::class, 'index']);
 
 Route::post('/addToCart', [ProductController::class, 'getForCart']);
 Route::post('/updateAmount', [CartController::class, 'updateAmount']);

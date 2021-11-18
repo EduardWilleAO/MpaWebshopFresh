@@ -29,7 +29,7 @@ class Order extends Model
         }
     }
 
-    public function getOrders(){
-        return Order::all();
+    public function getOrders($userId){
+        return Order::all()->where('user', $userId);
     }
 }

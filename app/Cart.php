@@ -97,7 +97,7 @@ class Cart
         $obj = $request->session()->get('products');
         $order = new Order();
 
-        $order->addProduct($user, $obj);
+        if($obj) $order->addProduct($user, $obj);
 
         return back();
     }

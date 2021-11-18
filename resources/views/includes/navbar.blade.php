@@ -25,7 +25,7 @@
         </li>
         @if(Auth::check())
         <li class="nav-item">
-          <a class="nav-link active" href="{{ url('/orderHistory') }}">Orders</a>
+          <a class="nav-link active" href="{{ url('/orderHistory', Auth::id()) }}">Orders</a>
         </li>
         @endif
         <!--<li class="nav-item">

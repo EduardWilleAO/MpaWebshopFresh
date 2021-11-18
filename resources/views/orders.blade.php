@@ -11,17 +11,14 @@
     @endif
 @endforeach
 
+@if(isset($orders[0]))
 @for($i=1; $i <= $maxOrder_id; $i++) <!-- runs 4 times if there are 4 different orders! -->
-
     @php $currLoop = $orders[$i]->order_id; @endphp <!-- sets current loop id -->
-
     <div style="border: 1px solid black;">
     <h1 class="text-center p-5 text-light">Order {{$i}}</h1>
 
-    @for($a=1; $a<=count($orders)-1; $a++) <!-- loops through all the products ordered -->
-        @if($maxOrder_id == $orders[$a]->order_id) <!-- if the current products order_id is the same as the current order_id from the first loop show it -->
-            <!--<h4><b>Product: </b>{{ $orders[$a]->product }}<h4>
-            <h4><b>Amount: </b>{{ $orders[$a]->product_amount }}</h4>-->
+    @for($a=0; $a<=count($orders)-1; $a++) <!-- loops through all the products ordered -->
+        @if($i == $orders[$a]->order_id) <!-- if the current products order_id is the same as the current order_id from the first loop show it -->
             <div class="card m-2">
                 <div class="card-body">
                     <div style="width: 50%; float: left;">
@@ -36,8 +33,12 @@
     </div>
 
     @php $lastLoop = $currLoop @endphp
-
 @endfor
+@else
+<div style="border: 1px solid black;">
+    <h1 class="text-center p-5 text-light">No orders placed yet</h1>
+</div>
+@endif
 
 </div>
 

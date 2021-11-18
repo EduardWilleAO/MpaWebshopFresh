@@ -7,9 +7,9 @@ use App\Models\Order;
 
 class OrderController extends Controller
 {
-    public function index(){
+    public function index($userId){
         $order = new Order();
-        $orders = $order->getOrders();
+        $orders = $order->getOrders($userId);
         
         return view('orders', ['orders' => $orders]);
     }
