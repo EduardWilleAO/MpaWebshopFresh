@@ -9,7 +9,7 @@ class Order extends Model
     protected $fillable = ['order_id', 'user', 'product', 'product_amount'];
 
     public function addProduct($currentUser, $obj){
-        $currTable = Order::all()->where('user' == $currentUser);
+        $currTable = Order::all()->where('user', $currentUser);   
         $order_id = 1;
 
         foreach ($currTable as $key) {
