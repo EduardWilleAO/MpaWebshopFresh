@@ -9,7 +9,7 @@ class Order extends Model
     protected $fillable = ['order_id', 'user', 'product', 'product_amount'];
 
     public function addProduct($currentUser, $obj){
-        $currTable = Order::all();
+        $currTable = Order::all()->where('user' == $currentUser);
         $order_id = 1;
 
         foreach ($currTable as $key) {
@@ -30,6 +30,6 @@ class Order extends Model
     }
 
     public function getOrders($userId){
-        return Order::all()->where('user', $userId);
+        return Order::where('user', $userId)->orderBy('order_id')->get();
     }
 }
