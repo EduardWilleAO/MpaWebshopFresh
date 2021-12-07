@@ -1,17 +1,3 @@
-<!--<ul>
-    <li><a href="{{ url('/') }}">Homepage</a></li>
-    <li class="has-dropdown"><a href="{{ url('categories') }}">Categories</a>
-        <ul id="dropdown-container">
-            <li class="dropdown"><a href="{{ url('category1') }}">Games</a></li>
-            <li class="dropdown"><a href="{{ url('category2') }}">Chairs</a></li>
-            <li class="dropdown"><a href="{{ url('category3') }}">Desks</a></li>
-            <li class="dropdown"><a href="{{ url('category4') }}">Microphones</a></li>
-            <li class="dropdown"><a href="{{ url('category5') }}">Peripherals</a></li>
-        </ul>
-    </li>
-    <li><a href="{{ url('cart') }}">Cart</a></li>
-</ul>-->
-
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ url('/') }}">Homepage</a>
@@ -25,19 +11,13 @@
         </li>
         @if(Auth::check())
         <li class="nav-item">
-          <a class="nav-link active" href="{{ url('/orderHistory', Auth::id()) }}">Orders</a>
+          <form action="/orderHistory" method="post">
+            @csrf
+            <input type="hidden" name="user" value="{{ Auth::id(); }}">
+            <input type="submit" class="nav-link active bg-dark border-0" value="Orders">
+          </form>
         </li>
         @endif
-        <!--<li class="nav-item">
-          <a class="nav-link active" href="{{ route('login') }}">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ route('register') }}">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ route('logout') }}">Logout</a>
-        </li>-->
-
         <ul class="navbar-nav" style="position: absolute; right: 5rem;">
           @guest <!-- if not logged in -->
               @if (Route::has('login'))

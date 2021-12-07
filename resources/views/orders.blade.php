@@ -3,13 +3,13 @@
 
 <div class="container bg-dark rounded mt-5 p-1" style="max-height: 80vh; overflow: scroll;"> 
 @if(!empty(reset($orders)))
-@php 
-$lastOrderNum = array_key_last(reset($orders));
-$firstOrderNum = key(reset($orders));
+    @php 
+        $lastOrderNum = array_key_last(reset($orders));
+        $firstOrderNum = key(reset($orders));
 
-$maxOrder_id = $orders[$lastOrderNum]->order_id;
-$minOrder_id = $orders[$firstOrderNum]->order_id;
-@endphp
+        $maxOrder_id = $orders[$lastOrderNum]->order_id;
+        $minOrder_id = $orders[$firstOrderNum]->order_id;
+    @endphp
 @endif
 
 @if(!empty(reset($orders)))
