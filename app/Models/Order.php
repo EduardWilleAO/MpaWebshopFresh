@@ -12,6 +12,12 @@ class Order extends Model
         $currTable = Order::all()->where('user', $currentUser);   
         $order_id = 1;
 
+        /**
+         * This foreach gets the entire order, so $newObj is "order1" or "order2",
+         * This doesnt include specific items within orders. This is so the order indexes work out properly
+         * 
+         * $newObj gets the highest orderId from table, then adds one which will be used as the new orders id
+         */
         foreach ($currTable as $key) {
             if($key) {
                 $newObj = collect($currTable)->sortByDesc('order_id')->first();
@@ -19,6 +25,9 @@ class Order extends Model
             }
         }
 
+        /**
+         * Adds object into the database
+         */
         foreach ($obj as $product) {
             $this->create([
                 'order_id' => $order_id,

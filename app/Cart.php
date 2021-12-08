@@ -9,11 +9,12 @@ use App\arrObj;
 
 class Cart
 {
-    //get products function
     private $products;
 
+    /**
+     * If check to see wether to use existing session or to create a new one.
+     */
     public function __construct($request){
-        //if request has products, else lege array in products
         if($request->session()->has('products')){
             $this->products = $request->session()->get('products');
         } else{
@@ -25,6 +26,9 @@ class Cart
         return $this->products;
     }
 
+    /**
+     * Function that calculates the total price of all products in the session.
+     */
     public function getTotalPrice($request){
         $obj = $request->session()->get('products');
         $prevPrice;
@@ -46,6 +50,13 @@ class Cart
         return $prevPrice;
     }
 
+    /**
+     * if $obj exists, look for the item that you're trying to add.
+     *      if an item with the same name as parameter name exists -> update amount
+     *      if no item with the same name exists, add it with the given amount
+     * 
+     * else the session is completely empty and it just pushes the product into the session.
+     */
     public function addToCart($request, $name, $img_url, $price, $userAmount){
         $obj = $request->session()->get('products'); // get all products
 
@@ -93,6 +104,10 @@ class Cart
         $request->session()->flush();
     }
 
+    /**
+     * Runs function inside of the model Order.
+     * This adds the item into the database if the cart is confirmed.
+     */
     public function confirmCart($request, $user){
         $obj = $request->session()->get('products');
         $order = new Order();
