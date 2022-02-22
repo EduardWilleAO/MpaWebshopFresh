@@ -17,19 +17,18 @@ class CategoryController extends Controller
     }
 
     /**
-     * Runs function from "productController" this retrieves all products belonging to the category
-     * Foreach changes the category variable from id to actual name, for instance from "1" to "games"\
+     * Uses the findOrFail to retrieve a specific category with an id
      * 
-     * Returns both the category name and all the products associated.
+     * @param products is retrieved with "hasMany" from the category model
+     * @param category is overwritten with the name of the current category
+     * 
+     * Return all the products and the category name
      */
     public function getCategory($id){
-        $categories = new Category();
-        $category = $categories->getCategories('id', $id);
+        $category = Category::findOrFail($id);
+        $products = $category->products;  
+        $category = $category->category;
         
-        $allProducts = app('App\Http\Controllers\ProductController')->returnWCategory($id);
-
-        foreach($category as $index) $category = $index->category;
-
-        return view('products', compact('category', 'allProducts'));
+        return view('products', compact('products', 'category'));
     }
 }

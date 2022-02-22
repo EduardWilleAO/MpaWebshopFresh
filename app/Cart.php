@@ -62,7 +62,7 @@ class Cart
 
         if($obj != null) {
             $find = array_search($name, array_column($obj, 'name'));
-
+            
             if($find !== false){
                 $obj[$find]->amount = $obj[$find]->amount + $userAmount;
             } else {

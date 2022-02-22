@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+//use App\Http\Cart;
+use App\Cart;
 
 class ProductController extends Controller
 {
@@ -11,29 +13,18 @@ class ProductController extends Controller
      * Simple function that gets a single product
      */
     public function returnSingle($id){
-        $product = new Product();
-        $product = $product->getProducts('id', $id);
+        $product = Product::where('id', $id)->get();
 
         return view('product', compact('product'));
-    }
-
-    /**
-     * Function that gets all product from specific category
-     */
-    public function returnWCategory($id){
-        $product = new Product();
-        $allProducts = $product->getProducts('category_id', $id);
-
-        return $allProducts;
     }
 
     /**
      * Gets all products
      */
     public function returnAll(){
-        $allProducts = Product::all();
+        $products = Product::all();
 
-        return view('products', compact('allProducts'));
+        return view('products', compact('products'));
     }
 
     /**
@@ -44,8 +35,7 @@ class ProductController extends Controller
         $id = $_POST['id'];
         $userAmount = $_POST['amount'];
 
-        $product = new Product();
-        $specificProduct = $product->getProducts('id', $id);
+        $specificProduct = Product::where('id', $id)->get();
 
         app('App\Http\Controllers\CartController')->addToCart($request, $specificProduct, $userAmount);
         

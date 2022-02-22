@@ -13,8 +13,8 @@
   @endif
 
   <div style="display: flex; flex-wrap: wrap; max-height: 80vh; overflow: scroll;">
-  @if (isset($allProducts))
-  @foreach ($allProducts as $index)
+  @if (isset($products))
+  @foreach ($products as $index)
   <div class="card text-center mt-3" style="width: 18rem; float: left; margin-left: 1rem;">
     <h4 class="card-header">
       <a href="{{ url('/product', $index->id) }}">{{ $index->product_name }}</a>
