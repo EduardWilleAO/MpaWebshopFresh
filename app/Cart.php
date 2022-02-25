@@ -82,7 +82,7 @@ class Cart
         $obj = $request->session()->get('products');
 
         foreach($obj as $index){
-            if($index->name == $name){
+            if($index->product_name == $name){
                 $index->amount = $amount;
             }
         }
