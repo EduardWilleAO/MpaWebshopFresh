@@ -7,12 +7,12 @@
     <div class="card m-2">
         <div class="card-body">
             <div style="width: 50%; float: left;">
-                <h3><b>Product:</b> {{ $product->name }}</h3>
+                <h3><b>Product:</b> {{ $product->product_name }}</h3>
                 <h5><b>Price:</b> €{{ $product->price }}</h5>
                 <h5><b>Amount:</b>
                     <form method="post" action="/updateAmount" style="display: inline-block;">    
                         @csrf
-                        <input name="name" type="hidden" value="{{ $product->name }}">
+                        <input name="name" type="hidden" value="{{ $product->product_name }}">
                         <input name="amount" style="max-width: 100px;" type="number" value="{{ $product->amount }}" required="required">
                     </form>
                 </h5>

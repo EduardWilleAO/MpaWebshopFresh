@@ -88,11 +88,17 @@ class Cart
         }
     }
 
+    /**
+     * @param obj get all items in cart.
+     * loop through the whole cart.
+     * if current itemname is the same as item name in parameter.
+     * unset the item on current foreach index.
+     */
     public function delete($request, $name){    
         $obj =  $request->session()->get('products');
         
         foreach($obj as $index=>$key){
-            if($key->name == $name){
+            if($key->product_name == $name){
                 unset($obj[$index]);
                 $request->session()->put('products', $obj);
             }
