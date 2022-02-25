@@ -12,7 +12,7 @@ class Cart
     private $products;
 
     /**
-     * If check to see wether to use existing session or to create a new one.
+     * If check to see whether to use existing session or to create a new one.
      */
     public function __construct($request){
         if($request->session()->has('products')){
@@ -51,32 +51,31 @@ class Cart
     }
 
     /**
-     * if $obj exists, look for the item that you're trying to add.
-     *      if an item with the same name as parameter name exists -> update amount
-     *      if no item with the same name exists, add it with the given amount
+     * @param obj is everything in the session.
+     * 
+     * if @param obj exists, look for the item that you're trying to add.
+     *      if itemname exists in the session, simply update amount.
+     *      if itemname doesn't exist in session, add whole item into array.
      * 
      * else the session is completely empty and it just pushes the product into the session.
      */
-    public function addToCart($request, $name, $img_url, $price, $userAmount){
-        $obj = $request->session()->get('products'); // get all products
+    public function addToCart($request, $product, $userAmount){
+        $obj = $request->session()->get('products');
 
-        if($obj != null) {
-            $find = array_search($name, array_column($obj, 'name'));
-            
+        if($obj){
+            $find = array_search($product->product_name, array_column($obj, 'product_name'));
+
             if($find !== false){
                 $obj[$find]->amount = $obj[$find]->amount + $userAmount;
-            } else {
-                $amount = $userAmount;
-                
-                $arr = new arrObj($name, $img_url, $price, $amount);
-                $request->session()->push('products', $arr);
             }
-        } else {
-            $amount = $userAmount;
-            
-            $arr = new arrObj($name, $img_url, $price, $amount);
-            $request->session()->push('products', $arr);
-        }
+            else{
+                $product->amount = $userAmount;
+                $request->session()->push('products', $product);
+            }
+        } else{
+            $product->amount = $userAmount;
+            $request->session()->push('products', $product);
+        }        
     }
 
     public function updateAmount($request, $name, $amount){
@@ -90,7 +89,7 @@ class Cart
     }
 
     public function delete($request, $name){    
-        $obj =  $request->session()->get('products');   
+        $obj =  $request->session()->get('products');
         
         foreach($obj as $index=>$key){
             if($key->name == $name){

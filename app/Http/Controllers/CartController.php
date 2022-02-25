@@ -8,8 +8,8 @@ use App\Cart;
 class CartController extends Controller
 {
     /**
-     * Display function
-     * Gets all products and calculates the price for all items in the cart
+     * @param products retrieves all current items within the cart.
+     * @param totalPrice uses total of items to calculate total price.
      */
     public function index(Request $request){
         $cart = new Cart($request);
@@ -17,19 +17,6 @@ class CartController extends Controller
         $totalPrice = $cart->getTotalPrice($request);
 
         return view('cart', compact('products', 'totalPrice'));
-    }
-
-    /**
-     * addToCart, function ran from product controller
-     * 
-     * Adds a given item to the cart session.
-     */
-    public function addToCart(Request $request, $product, $userAmount){
-        $cart = new Cart($request);
-
-        foreach($product as $index){
-            $cart->addToCart($request, $index->product_name, $index->img_url, $index->price, $userAmount);
-        }
     }
 
     /**
@@ -42,6 +29,7 @@ class CartController extends Controller
         $amount = $_POST['amount'];
 
         $cart = new Cart($request);
+        
         if($amount === "0"){
             $cart->delete($request, $name);
         } else {

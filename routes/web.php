@@ -22,7 +22,7 @@ Route::get('/category/{id}', [CategoryController::class, 'getCategory']);
 Route::get('/cart', [CartController::class, 'index']);
 
 Route::post('/orderHistory', [OrderController::class, 'index']);
-Route::post('/addToCart', [ProductController::class, 'getForCart']);
+Route::post('/addToCart', [ProductController::class, 'addToCart']);
 Route::post('/updateAmount', [CartController::class, 'updateAmount']);
 Route::post('/confirmOrder', [CartController::class, 'confirmOrder']);
 

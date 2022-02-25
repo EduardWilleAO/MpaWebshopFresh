@@ -31,13 +31,19 @@ class ProductController extends Controller
      * Gets a singular product, 
      * this retrieved product will be sent to cart controller to add it to the cart session.
      */
-    public function getForCart(Request $request){
+    //app('App\Http\Controllers\CartController')->addToCart($request, $specificProduct, $userAmount);
+    public function addToCart(Request $request){
         $id = $_POST['id'];
         $userAmount = $_POST['amount'];
 
-        $specificProduct = Product::where('id', $id)->get();
+        $product = Product::where('id', $id)->get();
 
-        app('App\Http\Controllers\CartController')->addToCart($request, $specificProduct, $userAmount);
+        $cart = new Cart($request);
+
+        foreach($product as $index){
+            $cart->addToCart($request, $index, $userAmount);
+            //$cart->addToCart($request, $index->product_name, $index->img_url, $index->price, $userAmount);
+        }
         
         return back();
     }
