@@ -108,17 +108,4 @@ class Cart
     public function clearCart($request){
         $request->session()->flush();
     }
-
-    /**
-     * Runs function inside of the model Order.
-     * This adds the item into the database if the cart is confirmed.
-     */
-    public function confirmCart($request, $user){
-        $obj = $request->session()->get('products');
-        $order = new Order();
-
-        if($obj) $order->addProduct($user, $obj);
-
-        return back();
-    }
 }

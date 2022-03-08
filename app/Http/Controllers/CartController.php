@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
 use App\Cart;
 
 class CartController extends Controller
@@ -43,8 +44,8 @@ class CartController extends Controller
      * ConfirmCart is a function that takes the entire cart and stores the data in the database as completed order.
      */
     public function confirmOrder(Request $request){
-        $cart = new Cart($request);
-        $cart->confirmCart($request, $_POST['user']);
+        $order = new Order();
+        $order->addProduct($request, $_POST['user']);
 
         return back();
     }

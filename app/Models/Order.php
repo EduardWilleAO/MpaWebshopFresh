@@ -8,7 +8,14 @@ class Order extends Model
 {
     protected $fillable = ['order_id', 'user', 'product', 'product_amount'];
 
-    public function addProduct($currentUser, $obj){
+    /**
+     * Runs function inside of the model Order.
+     * This adds the item into the database if the cart is confirmed.
+     */
+    public function addProduct($request, $currentUser){
+        $currSession = $request->session()->get('products');   
+        if(!$currSession) return; //if session is empty, cancel and go back to cart page.
+
         $currTable = Order::all()->where('user', $currentUser);   
         $order_id = 1;
 
@@ -28,11 +35,11 @@ class Order extends Model
         /**
          * Adds object into the database
          */
-        foreach ($obj as $product) {
+        foreach ($currSession as $product) {
             $this->create([
                 'order_id' => $order_id,
                 'user' => $currentUser,
-                'product' => $product->name,
+                'product' => $product->product_name,
                 'product_amount' => $product->amount
             ]);
         }
