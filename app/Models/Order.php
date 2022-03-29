@@ -3,17 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\OrderProduct;
+use App\Cart;
 
 class Order extends Model
 {
-    protected $fillable = ['order_id', 'user', 'product', 'product_amount'];
-
+    protected $fillable = ['user'];
     /**
      * Runs function inside of the model Order.
      * This adds the item into the database if the cart is confirmed.
      */
-    public function addProduct($request, $currentUser){
-        $currSession = $request->session()->get('products');   
+    public function addProductOLD($request, $currentUser){
+        $currSession = $request->session()->get('products');
         if(!$currSession) return; //if session is empty, cancel and go back to cart page.
 
         $currTable = Order::all()->where('user', $currentUser);   
@@ -45,7 +46,37 @@ class Order extends Model
         }
     }
 
+    public function addProduct($request, $currentUser){
+        $this->create(['user' => $currentUser]);
+
+        /**
+         * Gets the last order belonging to the current user
+         */
+        $order = $this::all()->where('user', $currentUser)->last();
+        
+        //get cart content
+        $cart = new Cart($request);
+        $products = $cart->getProducts($request);
+
+        $orderProduct = new OrderProduct();
+
+        foreach($products as $product){
+            $orderprod = OrderProduct::create([
+                'order_id' => $order->id,
+                'product_id' => $product->id,
+                'amount' => 1
+            ]);
+        }
+    }
+
     public function getOrders($userId){
         return Order::where('user', $userId)->orderBy('order_id')->get();
+    }
+
+    /**
+     * Generate order in order table.
+     */
+    public function test(){
+        dd($this);
     }
 }

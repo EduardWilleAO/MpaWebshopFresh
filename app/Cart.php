@@ -106,6 +106,6 @@ class Cart
     }
 
     public function clearCart($request){
-        $request->session()->flush();
+        $request->session()->forget('products');
     }
 }

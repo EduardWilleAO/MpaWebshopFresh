@@ -39,14 +39,4 @@ class CartController extends Controller
         
         return back();
     }
-
-    /**
-     * ConfirmCart is a function that takes the entire cart and stores the data in the database as completed order.
-     */
-    public function confirmOrder(Request $request){
-        $order = new Order();
-        $order->addProduct($request, $_POST['user']);
-
-        return back();
-    }
 }

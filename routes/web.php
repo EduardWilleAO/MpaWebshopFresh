@@ -21,10 +21,10 @@ Route::get('/product/{id}', [ProductController::class, 'returnSingle']);
 Route::get('/category/{id}', [CategoryController::class, 'getCategory']);
 Route::get('/cart', [CartController::class, 'index']);
 
-Route::post('/orderHistory', [OrderController::class, 'index']);
+Route::post('/orderHistory', [OrderController::class, 'test']);
 Route::post('/addToCart', [ProductController::class, 'addToCart']);
 Route::post('/updateAmount', [CartController::class, 'updateAmount']);
-Route::post('/confirmOrder', [CartController::class, 'confirmOrder']);
+Route::post('/confirmOrder', [OrderController::class, 'confirmOrder']);
 
 Route::get('/', [CategoryController::class, 'index']); 
 Route::get('/home', [CategoryController::class, 'index']);

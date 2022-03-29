@@ -29,12 +29,13 @@
 <div class="container bg-light rounded-bottom p-1">
     <div class="container-fluid">
         <div class="p-2 d-inline-block" style="width: 49%;">
-            
+        @if(Auth::check())
         <form action="/confirmOrder" method="post">
             @csrf
             <input type="hidden" name="user" value="{{ Auth::id(); }}">
             <input type="submit" class="btn btn-success p-2" value="Order Products">
         </form>
+        @endif
         </div>
         
         <div class="p-2 d-inline-block" style="width: 49%;">
