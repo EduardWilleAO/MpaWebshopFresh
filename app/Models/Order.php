@@ -9,6 +9,11 @@ use App\Cart;
 class Order extends Model
 {
     protected $fillable = ['user'];
+
+    public function products(){
+        return $this->belongsToMany(Product::class)->withPivot('amount');
+    }
+
     /**
      * Runs function inside of the model Order.
      * This adds the item into the database if the cart is confirmed.
@@ -46,7 +51,7 @@ class Order extends Model
         }
     }
 
-    public function addProduct($request, $currentUser){
+    public function confirmOrder($request, $currentUser){
         $this->create(['user' => $currentUser]);
 
         /**
@@ -64,19 +69,12 @@ class Order extends Model
             $orderprod = OrderProduct::create([
                 'order_id' => $order->id,
                 'product_id' => $product->id,
-                'amount' => 1
+                'amount' => $product->amount
             ]);
         }
     }
 
     public function getOrders($userId){
-        return Order::where('user', $userId)->orderBy('order_id')->get();
-    }
-
-    /**
-     * Generate order in order table.
-     */
-    public function test(){
-        dd($this);
+        return Order::where('user', $userId)->get();
     }
 }

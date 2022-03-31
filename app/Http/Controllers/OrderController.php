@@ -8,13 +8,13 @@ use App\Cart;
 
 class OrderController extends Controller
 {
-    public function index(){
+    public function getOrders(){
         $userId = $_POST['user'];
 
         $order = new Order();
-        $orders = $order->getOrders($userId);
+        $orders = Order::where('user', $userId)->get();
 
-        return view('orders', ['orders' => $orders]);
+        return view('orders', compact('orders'));
     }
 
     /**
@@ -24,16 +24,11 @@ class OrderController extends Controller
         $userId = $_POST['user'];
 
         $order = new Order();
-        $order->addProduct($request, $userId); //creates new order
+        $order->confirmOrder($request, $userId); //creates new order
 
         $cart = new Cart($request);
         $cart->clearCart($request);
 
         return back();
-    }
-
-    public function test(){
-        $order = new Order();
-        $order->test();
     }
 }
