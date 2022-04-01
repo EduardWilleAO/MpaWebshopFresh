@@ -5,7 +5,6 @@ namespace App;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Order;
-use App\arrObj;
 
 class Cart
 {
@@ -27,7 +26,14 @@ class Cart
     }
 
     /**
-     * Function that calculates the total price of all products in the session.
+     * Gets all products.
+     * Create @param prevPrice, this will be used to take current price of products and add new one on top. 
+     * 
+     * Check if the session is filled.
+     * Loop through all the items in cart.
+     * 
+     * @param currPrice is a singular items price.
+     * @param totalPrice is the price of one item * the amount of the same items in the cart.
      */
     public function getTotalPrice($request){
         $obj = $request->session()->get('products');
@@ -78,6 +84,10 @@ class Cart
         }        
     }
 
+    /**
+     * Function to change the amount of the item in cart.
+     * Just takes the given amount and overwrites the old amount.
+     */
     public function updateAmount($request, $name, $amount){
         $obj = $request->session()->get('products');
 

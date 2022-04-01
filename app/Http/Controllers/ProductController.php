@@ -18,15 +18,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Gets all products
-     */
-    public function returnAll(){
-        $products = Product::all();
-
-        return view('products', compact('products'));
-    }
-
-    /**
      * Gets a singular product, 
      * this retrieved product will be sent to cart controller to add it to the cart session.
      */

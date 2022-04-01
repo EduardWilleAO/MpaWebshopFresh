@@ -12,7 +12,7 @@ class Order extends Model
 
     /**
      * Generate a many to many relationship between product and order.
-     * WithPivot is so that the amount column from the database will also be accesible.
+     * WithPivot is so that the "amount" column from the database will also be accesible.
      */
     public function products(){
         return $this->belongsToMany(Product::class)->withPivot('amount');

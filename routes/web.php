@@ -16,7 +16,6 @@ use App\Http\Controllers\OrderController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/products', [ProductController::class, 'returnAll']);
 Route::get('/product/{id}', [ProductController::class, 'returnSingle']);
 Route::get('/category/{id}', [CategoryController::class, 'getCategory']);
 Route::get('/cart', [CartController::class, 'index']);

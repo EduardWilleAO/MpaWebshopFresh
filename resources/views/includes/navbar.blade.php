@@ -3,8 +3,15 @@
     <a class="navbar-brand" href="{{ url('/') }}">Homepage</a>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ url('/products') }}">Products</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" role="Dropdown">
+            <li><a class="dropdown-item" href="{{ url('/category/1') }}">Games</a></li>
+            <li><a class="dropdown-item" href="{{ url('/category/2') }}">Hardware</a></li>
+            <li><a class="dropdown-item" href="{{ url('/category/3') }}">Accessories</a></li>
+            <li><a class="dropdown-item" href="{{ url('/category/4') }}">Simulation Gear</a></li>
+            <li><a class="dropdown-item" href="{{ url('/category/5') }}">Camping Gear</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="{{ url('/cart') }}">Cart</a>
