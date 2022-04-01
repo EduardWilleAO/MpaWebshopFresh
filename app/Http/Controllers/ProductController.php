@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-//use App\Http\Cart;
 use App\Cart;
 
 class ProductController extends Controller
@@ -31,7 +30,6 @@ class ProductController extends Controller
      * Gets a singular product, 
      * this retrieved product will be sent to cart controller to add it to the cart session.
      */
-    //app('App\Http\Controllers\CartController')->addToCart($request, $specificProduct, $userAmount);
     public function addToCart(Request $request){
         $id = $_POST['id'];
         $userAmount = $_POST['amount'];
@@ -42,7 +40,6 @@ class ProductController extends Controller
 
         foreach($product as $index){
             $cart->addToCart($request, $index, $userAmount);
-            //$cart->addToCart($request, $index->product_name, $index->img_url, $index->price, $userAmount);
         }
         
         return back();

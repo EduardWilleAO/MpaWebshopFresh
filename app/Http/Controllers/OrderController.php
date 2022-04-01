@@ -8,6 +8,9 @@ use App\Cart;
 
 class OrderController extends Controller
 {
+    /**
+     * Get all orders belonging to specific user
+     */
     public function getOrders(){
         $userId = $_POST['user'];
 
@@ -18,7 +21,8 @@ class OrderController extends Controller
     }
 
     /**
-     * ConfirmCart is a function that takes the entire cart and stores the data in the database as completed order.
+     * Run comfirm order function in model
+     * Clear cart
      */
     public function confirmOrder(Request $request){
         $userId = $_POST['user'];
