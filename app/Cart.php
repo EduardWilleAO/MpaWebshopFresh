@@ -8,7 +8,7 @@ use App\Models\Order;
 
 class Cart
 {
-    private $products;
+    private $products = [];
 
     /**
      * If check to see whether to use existing session or to create a new one.
@@ -17,11 +17,11 @@ class Cart
         if($request->session()->has('products')){
             $this->products = $request->session()->get('products');
         } else{
-            $this->products = NULL;
+            $this->products = [];
         }
     }
 
-    public function getProducts($request){
+    public function getProducts(){
         return $this->products;
     }
 
@@ -35,14 +35,14 @@ class Cart
      * @param currPrice is a singular items price.
      * @param totalPrice is the price of one item * the amount of the same items in the cart.
      */
-    public function getTotalPrice($request){
-        $obj = $request->session()->get('products');
+    public function getTotalPrice(){
+        $products = $this->products;
         $prevPrice;
 
-        if($obj){
-            foreach($obj as $index){
-                $currPrice = $index->price;
-                $totalPrice = $currPrice * $index->amount;
+        if($products){
+            foreach($products as $product){
+                $currPrice = $product->price;
+                $totalPrice = $currPrice * $product->amount;
 
                 if(isset($prevPrice)) $prevPrice = $prevPrice + $totalPrice;
                 else $prevPrice = $totalPrice;
@@ -57,30 +57,31 @@ class Cart
     }
 
     /**
-     * @param obj is everything in the session.
+     * @param products is everything in the session.
      * 
-     * if @param obj exists, look for the item that you're trying to add.
+     * if @param products exists, look for the item that you're trying to add.
      *      if itemname exists in the session, simply update amount.
      *      if itemname doesn't exist in session, add whole item into array.
      * 
      * else the session is completely empty and it just pushes the product into the session.
      */
-    public function addToCart($request, $product, $userAmount){
-        $obj = $request->session()->get('products');
+    public function addToCart($product, $userAmount){
+        //$obj = $request->session()->get('products');
+        $products = $this->products;
 
-        if($obj){
-            $find = array_search($product->product_name, array_column($obj, 'product_name'));
+        if($products){
+            $find = array_search($product->product_name, array_column($products, 'product_name'));
 
             if($find !== false){
-                $obj[$find]->amount = $obj[$find]->amount + $userAmount;
+                $products[$find]->amount = $products[$find]->amount + $userAmount;
             }
             else{
                 $product->amount = $userAmount;
-                $request->session()->push('products', $product);
+                array_push($this->products, $product);
             }
         } else{
             $product->amount = $userAmount;
-            $request->session()->push('products', $product);
+            array_push($this->products, $product);
         }        
     }
 
@@ -88,12 +89,13 @@ class Cart
      * Function to change the amount of the item in cart.
      * Just takes the given amount and overwrites the old amount.
      */
-    public function updateAmount($request, $name, $amount){
-        $obj = $request->session()->get('products');
+    public function updateAmount($name, $amount){
+        //$obj = $request->session()->get('products');
+        $products = $this->products;
 
-        foreach($obj as $index){
-            if($index->product_name == $name){
-                $index->amount = $amount;
+        foreach($products as $product){
+            if($product->product_name == $name){
+                $product->amount = $amount;
             }
         }
     }
@@ -104,18 +106,25 @@ class Cart
      * if current itemname is the same as item name in parameter.
      * unset the item on current foreach index.
      */
-    public function delete($request, $name){    
-        $obj =  $request->session()->get('products');
+    public function delete($name){    
+        $products = $this->products;
         
-        foreach($obj as $index=>$key){
+        foreach($products as $product=>$key){
             if($key->product_name == $name){
-                unset($obj[$index]);
-                $request->session()->put('products', $obj);
+                unset($products[$product]);
+                $this->products = $products;
             }
         }
     }
 
-    public function clearCart($request){
-        $request->session()->forget('products');
+    public function saveSession($request){
+        $currentSession = $this->products;
+        $oldSession = $request->session()->get('products');
+
+        $request->session()->flush();
+
+        foreach($currentSession as $item){
+            $request->session()->push('products', $item);
+        }
     }
 }

@@ -29,7 +29,7 @@ class Order extends Model
      *  product_id
      */
     public function confirmOrder($request, $currentUser){
-        $this->create(['user' => $currentUser]);
+        $this->insert(['user' => $currentUser]);
 
         /**
          * Gets the last order belonging to the current user
@@ -43,7 +43,7 @@ class Order extends Model
         $orderProduct = new OrderProduct();
 
         foreach($products as $product){
-            $orderprod = OrderProduct::create([
+            $orderProduct->insert([
                 'order_id' => $order->id,
                 'product_id' => $product->id,
                 'amount' => $product->amount

@@ -36,7 +36,7 @@
             <input type="submit" class="btn btn-success p-2" value="Order Products">
         </form>
         @endif
-        </div>
+        </div>  
         
         <div class="p-2 d-inline-block" style="width: 49%;">
             <h3 class="text-end p-2"><b>Total price:</b> €{{ $totalPrice }}</h3>
