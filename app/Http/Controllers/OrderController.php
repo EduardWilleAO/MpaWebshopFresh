@@ -14,7 +14,6 @@ class OrderController extends Controller
     public function getOrders(){
         $userId = $_POST['user'];
 
-        $order = new Order();
         $orders = Order::where('user', $userId)->get();
 
         return view('orders', compact('orders'));
@@ -28,7 +27,7 @@ class OrderController extends Controller
         $userId = $_POST['user'];
 
         $order = new Order();
-        $order->confirmOrder($request, $userId); //creates new order
+        $order = $order->confirmOrder($request, $userId); //creates new order
 
         $cart = new Cart($request);
         $cart->clearCart($request);

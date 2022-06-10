@@ -121,10 +121,14 @@ class Cart
         $currentSession = $this->products;
         $oldSession = $request->session()->get('products');
 
-        $request->session()->flush();
+        $request->session()->forget('products');
 
         foreach($currentSession as $item){
             $request->session()->push('products', $item);
         }
+    }
+
+    public function clearCart($request){
+        $request->session()->forget('products');
     }
 }
